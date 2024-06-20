@@ -31,6 +31,7 @@ int main(void) {
         else if(cmd == "empty") printf("%d\n", (front == rear));
         else if(cmd == "size") printf("%d\n", (n+1+rear-front)%(n+1));
     }
+    delete []queue;
 
     return 0;
 }
