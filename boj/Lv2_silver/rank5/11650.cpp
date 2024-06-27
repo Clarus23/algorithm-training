@@ -13,5 +13,6 @@ int main(void) {
 
     for(int i=0; i<n; i++) cout << points[i].first << ' ' << points[i].second << '\n';
 
+    delete []points;
     return 0;
 }
