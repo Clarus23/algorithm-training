@@ -21,11 +21,10 @@ int main() {
             int out = 0;
             while(out < 3) {
                 int curBatter;
-                if(batter >= 0 && batter < 3) curBatter = lineup[batter];
-                else if(batter == 3) curBatter = 0;
-                else curBatter = lineup[batter-1];
+                if(batter == 3) curBatter = 0;
+                else curBatter = (batter < 3) ? lineup[batter] : lineup[batter-1];
 
-                int batting = scoreBoard[innings][curBatter];
+                int& batting = scoreBoard[innings][curBatter];
                 if(batting == 0) out++;
                 else {
                     for(int i=(4-batting); i<4; i++) score += (base[i]) ? 1 : 0;
