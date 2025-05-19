@@ -58,16 +58,13 @@ int main() {
         for(pair<int, int> next : dirs) {
             next += cur;
 
-
-            if(next.first < -1 || next.first > r || next.second < -1 || next.second > c) continue;
-            if(next.first == -1 || next.first == r || next.second == -1 || next.second == c) {
+            if(next.first < 0 || next.first >= r || next.second < 0 || next.second >= c) {
                 if(who == 'f') continue;
 
                 cout << timer;
                 isEnd = true;
                 break;
             }
-
             if(maze[next.first][next.second] == '#') continue;
 
 
