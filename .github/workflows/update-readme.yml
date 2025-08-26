@@ -3,17 +3,22 @@ name: Update README on Push
 on:
   push:
     branches:
-      - main   # main 브랜치에 push 될 때만 실행
+      - main  # main 브랜치에 push 될 때만 실행
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
 
+    # 💡 이 부분을 추가해 주세요!
+    # 기본 GITHUB_TOKEN에 콘텐츠 쓰기 권한을 부여합니다.
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: main   # main 브랜치를 강제로 체크아웃
+          ref: main  # main 브랜치를 강제로 체크아웃
 
       - name: Set up Python
         uses: actions/setup-python@v4
