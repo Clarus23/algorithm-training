@@ -1,4 +1,3 @@
-````markdown
 # 🧑‍💻 Algorithm Training Repository
 
 [![Solved.ac 프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=clarus23)](https://solved.ac/clarus23)
