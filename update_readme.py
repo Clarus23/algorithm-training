@@ -1,93 +1,64 @@
 import os
-import re
 
-# ------------ 경로 설정 ------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-README_PATH = os.path.join(BASE_DIR, "README.md")
+# 카운트할 확장자
+TARGET_EXTENSIONS = [".cpp", ".java"]
 
-# ------------ 문제 풀이 경로 매핑 ------------
-paths = {
-    "boj": {
-        "🥉 Bronze": "boj/Lv1_bronze",
-        "🥈 Silver": "boj/Lv2_silver",
-        "🥇 Gold": "boj/Lv3_gold",
-        "💎 Platinum": "boj/Lv4_platinum"
-    },
-    "programmers": {
-        "Lv.1": "programmers/Lv1",
-        "Lv.2": "programmers/Lv2"
-    },
-    "swea": {
-        "전체": "swea"
-    }
-}
+# 탐색 대상 디렉토리
+TARGET_DIRS = ["boj", "programmers", "swea"]
 
-def count_files(path: str) -> int:
-    """경로 내 모든 파일 개수 세기"""
-    if not os.path.exists(path):
-        return 0
-    return len([f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))])
+def count_solutions(base_path):
+    total = 0
+    detail_counts = {}
 
-def generate_table():
-    """각 플랫폼별 통계 테이블 생성"""
-    tables = {}
+    for target in TARGET_DIRS:
+        dir_path = os.path.join(base_path, target)
+        count = 0
+        if os.path.exists(dir_path):
+            for root, _, files in os.walk(dir_path):
+                for file in files:
+                    if any(file.endswith(ext) for ext in TARGET_EXTENSIONS):
+                        count += 1
+                        total += 1
+        detail_counts[target] = count
 
-    # BOJ
-    boj_table = "| 난이도 | 풀이 수 |\n| ------ | ------ |\n"
-    for level, path in paths["boj"].items():
-        boj_table += f"| {level} | {count_files(os.path.join(BASE_DIR, path))} |\n"
-    tables["boj"] = boj_table
+    return total, detail_counts
 
-    # Programmers
-    prog_table = "| 난이도 | 풀이 수 |\n| ------ | ------ |\n"
-    for level, path in paths["programmers"].items():
-        prog_table += f"| {level} | {count_files(os.path.join(BASE_DIR, path))} |\n"
-    tables["programmers"] = prog_table
 
-    # SWEA
-    swea_table = "| 구분 | 풀이 수 |\n| ---- | ------ |\n"
-    for level, path in paths["swea"].items():
-        swea_table += f"| {level} | {count_files(os.path.join(BASE_DIR, path))} |\n"
-    tables["swea"] = swea_table
+def update_readme(base_path, total, detail_counts):
+    readme_path = os.path.join(base_path, "README.md")
+    with open(readme_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
 
-    return tables
+    # README 내에 "## 📊 풀이 현황" 블럭 갱신
+    start_marker = "## 📊 풀이 현황"
+    start_idx = None
+    for i, line in enumerate(lines):
+        if line.strip() == start_marker:
+            start_idx = i
+            break
 
-def update_readme():
-    """README.md 파일 내 표를 자동 갱신"""
-    tables = generate_table()
+    if start_idx is not None:
+        # 기존 블럭 제거 후 새로 삽입
+        lines = lines[:start_idx+1]
+    else:
+        # 없으면 맨 끝에 추가
+        lines.append("\n" + start_marker + "\n")
 
-    with open(README_PATH, "r", encoding="utf-8") as f:
-        content = f.read()
+    # 새로운 통계 내용 작성
+    stats_block = [
+        f"\n- 총 풀이 수: **{total}** 문제\n",
+        f"- BOJ: **{detail_counts.get('boj', 0)}** 문제\n",
+        f"- Programmers: **{detail_counts.get('programmers', 0)}** 문제\n",
+        f"- SWEA: **{detail_counts.get('swea', 0)}** 문제\n",
+        "\n"
+    ]
+    lines.extend(stats_block)
 
-    # BOJ 테이블 교체
-    content = re.sub(
-        r"(### ✅ Baekjoon Online Judge\n)(\|.*?\n)+",
-        "### ✅ Baekjoon Online Judge\n" + tables["boj"],
-        content,
-        flags=re.DOTALL
-    )
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.writelines(lines)
 
-    # Programmers 테이블 교체
-    content = re.sub(
-        r"(### ✅ Programmers\n)(\|.*?\n)+",
-        "### ✅ Programmers\n" + tables["programmers"],
-        content,
-        flags=re.DOTALL
-    )
-
-    # SWEA 테이블 교체
-    content = re.sub(
-        r"(### ✅ SWEA\n)(\|.*?\n)+",
-        "### ✅ SWEA\n" + tables["swea"],
-        content,
-        flags=re.DOTALL
-    )
-
-    with open(README_PATH, "w", encoding="utf-8") as f:
-        f.write(content)
-
-    print("✅ README.md 업데이트 완료!")
 
 if __name__ == "__main__":
-    update_readme()
-
+    BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+    total, detail_counts = count_solutions(BASE_PATH)
+    update_readme(BASE_PATH, total, detail_counts)
