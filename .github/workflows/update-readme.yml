@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: main   # main 브랜치를 강제로 체크아웃
 
       - name: Set up Python
         uses: actions/setup-python@v4
