@@ -1,6 +1,6 @@
 # 🧑‍💻 Algorithm Training Repository
 
-[![Solved.ac 프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=clarus23)](https://solved.ac/clarus23)
+[![Solved.ac 프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=dnjs3023)](https://solved.ac/dnjs3023)
 
 ---
 
