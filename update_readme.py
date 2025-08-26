@@ -24,8 +24,9 @@ def get_solved_counts():
         "silver": count_files_in_dir("boj/Lv2_silver"),
         "gold": count_files_in_dir("boj/Lv3_gold"),
         "platinum": count_files_in_dir("boj/Lv4_platinum"),
-        "programmers_lv1": count_files_in_dir("programmers/Lv1"),
-        "programmers_lv2": count_files_in_dir("programmers/Lv2"),
+        # 변경된 폴더 구조에 맞게 경로 수정
+        "programmers_lv1": count_files_in_dir("programmers/Lv_1"),
+        "programmers_lv2": count_files_in_dir("programmers/Lv_2"),
         "swea": count_files_in_dir("swea"),
     }
     return counts
