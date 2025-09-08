@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 /*
  * # 풀이 아이디어: BFS 
- * 	- 처음에 행렬의 가장 가장자리부터 bfs를 수행
+ * 	- 처음에 행렬의 가장 가장자리(0, 0)부터 bfs를 수행
  * 	- 0이면 bfs를 이어가고 1을 만나면 nextQ에 저장(치즈 개수를 -1)
  * 	- bfs가 끝나면 q를 nextQ로 바꿔침.
  * 	- 치즈개수가 0이 될때까지 반복 수행
@@ -44,21 +44,8 @@ public class Main {
 		}
 		
 		Queue<int[]> q = new ArrayDeque<>();
-		for(int row=0; row<n; ++row) {
-			q.offer(new int[] {row, 0});
-			q.offer(new int[] {row, m-1});
-			
-			board[row][0] = -1;
-			board[row][m-1] = -1;
-		}
-		for(int col=1; col<m-1; ++col) {
-			q.offer(new int[] {0, col});
-			q.offer(new int[] {n-1, col});
-			
-			board[0][col] = -1;
-			board[n-1][col] = -1;
-		}
-		
+		q.offer(new int[] {0, 0});
+		board[0][0] = -1;
 		int prevCnt=-1, time = 0;
 		while(cnt > 0) {
 			prevCnt = cnt;
