@@ -102,7 +102,7 @@ public class Solution {
 
         int maxPower = 0;
 
-        // 모든 BC 조합(i, j)에 대해 최대 충전량 계산
+        // 모든 BC 조합(i, j)에 대해 최대 충전량 계산.
         // i: 사용자 A가 선택할 BC, j: 사용자 B가 선택할 BC
         for (int i = 0; i <= a; i++) {
             for (int j = 0; j <= a; j++) {
