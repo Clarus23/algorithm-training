@@ -6,7 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 /*
- * # 풀이 아이디어: 시뮬레이션(단순 구현)
+ * # 풀이 아이디어: Simulation(단순 구현)
  * ## 각 초마다 모든 미생물의 움직임을 추적한다.
  * ## 이를 위하여 미생물의 정보를 저장할 클래스를 선언한다.
  * ## 미생물 클래스
