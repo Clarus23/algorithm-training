@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.StringTokenizer;
 
 /*
- * # 풀이 아이디어: BFS 순회
+ * # 풀이 아이디어: BFS
  * ## bfs 탐색, l 시간을 넘어서면 (== depth가 l보다 크면) 탐색 종료
  * #### 주의! 탐색시 다음 파이프를 확인해서 "연결 되어있는지" 확인 필요.
  * ## 터널의 모양에 따라 탐색할 수 있는 위치가 다르므로 주의 필요.
