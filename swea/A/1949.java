@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
- * # 풀이 아이디어: dfs 탐색
+ * # 풀이 아이디어: DFS
  * ## 다음번 탐색지가 나보다 크기가 적으면 탐색 아니면 탐색하지 않는 dfs
  * ## 하지만, 경로상 딱 한번 최대 k만큼 다음 탐색지를 깎을 수 있음.
  * #### boolean 변수를 이용 깎았는지 안깎았는지 판별
