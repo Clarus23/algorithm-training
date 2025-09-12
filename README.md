@@ -20,7 +20,7 @@
 | ----------- | ---- |
 | 🥉 Bronze   | 79    |
 | 🥈 Silver   | 135    |
-| 🥇 Gold     | 87    |
+| 🥇 Gold     | 88    |
 | 💎 Platinum | 5    |
 
 ### ✅ Programmers
